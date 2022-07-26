@@ -1,5 +1,11 @@
 # CMake Practice
 
+*参考*
+
+*[Linux下CMake简明教程](https://blog.csdn.net/whahu1989/article/details/82078563?spm=1001.2014.3001.5506)*
+
+*CMake Practice*
+
 ## 特点
 
 1. 开放源代码,使用类 BSD 许可发布

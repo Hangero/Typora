@@ -1,5 +1,13 @@
 # SLAM
 
+*参考*
+
+*《SLAM十四讲》*
+
+*《Introduction to Linear Algebra》*
+
+*《ROS机器人开发实践》*
+
 ## 基本名词
 
 ### 内参和外参

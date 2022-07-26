@@ -1,8 +1,12 @@
 # Git
 
+*参考*
+
+*[[廖雪峰的官方网站](https://www.liaoxuefeng.com/)]*
+
 ## 创建版本库
 
-### git init 
+### git init
 
 ```shell
 git init
