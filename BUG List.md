@@ -356,4 +356,17 @@ $ rospack find [pack_name]
    SET_TARGET_PROPERTIES(hello_static PROPERTIES OUTPUT_NAME "hello")#将libhello_static.a改为libhello.a
    ```
 
+
+8. ```cpp
+   cpp.cpp:5:18: error: cast from ‘int*’ to ‘int’ loses precision [-fpermissive]
+        cout << (int)arr << endl;
+   ```
+
+   ```cpp
+   (int)arr //显示会丢失精度
    
+   (long)arr//OK
+   ```
+
+   
+
