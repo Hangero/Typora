@@ -1065,6 +1065,8 @@ int main(int argc, char *argv[])
 
 ROS Master 作为一个公共容器保存参数，Talker 可以向容器中设置参数，Listener 可以获取参数。
 
+**参数类似全局变量**
+
 ![](/home/suyu/Typora/Linux/image/ROS/03ROS通信机制03_参数服务器.jpg)
 
 **Talker 设置参数**
@@ -1079,7 +1081,9 @@ Listener 通过 RPC 向参数服务器发送参数查找请求，请求中包含
 
 ROS Master 根据步骤2请求提供的参数名查找参数值，并将查询结果通过 RPC 发送给 Listener。
 
-> 注意:参数服务器不是为高性能而设计的，因此最好用于存储静态的非二进制的简单数据
+> 注意:参数服务器不是为高性能而设计的，因此最好用于存储静态的非二进制的简单数据；
+>
+> **如果参数更新而没有被查询，则Listener处参数值不会更新，这是本机制的弊端**
 
 参数可使用数据类型:
 
@@ -1109,7 +1113,7 @@ ROS Master 根据步骤2请求提供的参数名查找参数值，并将查询�
 
 
 
-
+​						
 
 [^1]:记得要在`package.xml`和`CMakeList.txt`中同步修改名称(https://www.guyuehome.com/35250)
 

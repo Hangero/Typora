@@ -47,11 +47,23 @@
 
 刚上大一，你的机器人生涯开始了。先看看学校的校园网能不能翻墙，不能的话自己去买个一年一百多块钱的VPN，先确保自己能上Google，不要心疼VPN的钱，这能让你在之后的职业生涯里节省上万块钱。然后去注册一个gmail账号，再注册stackoverflow账号，再注册github的账号，再注册CSDN账号，注册完登录上去逛逛，暂时先不要问为什么。
 
+- [x] VPN
+- [x] Google
+- [x] gmail
+- [x] stackoverflow
+- [x] github
+
 英语水平一定程度上会是机器人工程师水平的限制因素，英语是同学们在大学最该努力学的一门课，而且不止要把它当成课，要当成一种技能，当成生活的一部分。当你开始努力学习一些高级的机器人知识以后，有可能会非常难以找到中文的参考资料，这个时候如果啃不下英文的资料，进步速度和眼界就会受到很大影响。因此大一的时候要多看看红宝书，看看美剧。
+
+- [ ] 英语
+- [ ] 
 
 不管是什么专业背景的同学，大学一年级一定要上好的课是微积分和线性代数。线性代数的重要性需要特别强调。一般来说，**优秀的工程师和科学家在职业生涯中要学至少五次线性代数**，大一学一遍、学凸优化的时候学一遍、学线性系统的时候学一遍、学机器学习的时候学一遍……如果在第一遍学的时候就看到对的书，刷到对的题，那么以后的学习会轻松很多。
 
 网上有很多对于如何学好线性代数的讨论，比如知乎问题[如何理解线性代数？ - 数学学习](https://www.zhihu.com/question/20534668)。Matrix67大神的文章[随记：我们需要怎样的数学教育？](https://link.zhihu.com/?target=http%3A//www.matrix67.com/blog/archives/4294)也很有启发。我个人对学习线性代数的建议是两本书，一本叫做《Linear Algebra Done Right》，另一本叫做《Linear Algebra Done Wrong》（[https://www.math.brown.edu/~treil/papers/LADW/book.pdf](https://link.zhihu.com/?target=https%3A//www.math.brown.edu/~treil/papers/LADW/book.pdf)），我比较喜欢的是Done Wrong这本书，第一它是免费的，第二只需要读前6章两百页就够了，第三它页边距很大，打印出来有很多空白做练习题。另外一个较好的教材是[麻省理工公开课：线性代数](https://link.zhihu.com/?target=http%3A//open.163.com/special/opencourse/daishu.html)。不论如何，学线性代数一定要用国外的教材，千万不要用国内的教材。啃英文书很累，但是考虑到之后还要啃更多的英文书，线性代数已经算是很入门的了，一定要啃下来，同时还要刷足够多的课后题。
+
+- [ ] 线性代数
+- [x] MIT教材
 
 学完线性代数以后，一个自然而然的问题就是怎么能用计算机自己去计算矩阵的乘法、向量的乘法、向量的内积。因此引入了编程的学习。
 
@@ -59,12 +71,20 @@
 
 对任何人来说，Python是一把瑞士军刀，你可以用他干很多东西，比如自动回复邮件、自动收集信息。但是真要去造机器人，合适的工具并不是瑞士军刀，而是C/C++这样简单粗暴的锤子和螺丝刀般的工具。在学习Python学到一定程度的时候（比如你听说有一种叫做cython的东西），最好开始学习C，而且要强迫自己练习用C的一维数组和指针来实现矩阵的加法、乘法、求逆等操作。之所以有高级的Python或者Java（不要问我Java哪里高级了）这些语言以后我们还需要去学C，是因为机器人上常用的不是完整的电脑，而是计算量有局限的嵌入式系统，嵌入式系统开发基本只能用C或者更低级的语言。
 
+- [ ] C++
+- [ ] C
+- [ ] Python
+
 学习C我个人入门用的是清华大学出版的《[C++语言程序设计](https://link.zhihu.com/?target=http%3A//product.dangdang.com/8880276.html)》。虽然这个书标题是C++，但其实没什么太大问题。不过国内的C语言教材都有个巨大的问题是不引导学生去用Linux。近年来更好的一个教材是[http://songjinshan.com/akabook/zh/index.html](https://link.zhihu.com/?target=http%3A//songjinshan.com/akabook/zh/index.html)，这个网站的教材非常好，因为他教育学生用Linux环境作为程序编译的环境，而且还引入了一些计算机体系结构的介绍。
 
 IT行业的程序员都会争论高级语言和低级语言哪个好，Linux和Windows哪个好，而对于机器人工程师来说，从现在到可预见的未来里，C是最好的语言，Linux是最好的操作系统，这都毋庸置疑。甚至对于Linux的发行版该选哪个，我们都是很少有质疑的：Ubuntu（[The leading OS for PC, tablet, phone and cloud](https://link.zhihu.com/?target=http%3A//www.ubuntu.com/global)）。原因是机器人操作系统ROS（[ROS.org | Powering the world's robots](https://link.zhihu.com/?target=http%3A//www.ros.org/)）是基于Ubuntu开发的，因此在Ubuntu上运行最稳定。注意Ubuntu出了一个中文版叫做Kylin，个人感觉比较坑，建议大家不要装中文版。Ubuntu 作为一个开源操作系统，总是在快速迭代，2016年8月比较稳定的版本是14.04和16.04，建议同学安装14.04。
 
+- [ ] ROS
+- [ ] Ubuntu
+
 当你把C学得差不多，开始要学写包含多个头文件的程序时，一定要同时学习makefile的知识。这时候要上网去搜“Makefile详解”（[Makefile详解（超级好）_mingw吧](https://link.zhihu.com/?target=http%3A//tieba.baidu.com/p/591519800)）这篇文章看。
 
+- [x] CMake
 
 
 我自己在大学一年级的时候还学习了HTML和Javascript，到大一结束的时候已经能够熟练用Javascript手写一些动态页面。我个人觉得HTML和Javascript也是机器人工程师必备的技术，而不只是软件工程师的玩具。这是因为web技术实际上已经渗透到了编程的方方面面，比如json开始是Javascript里的一种object定义的方式，但现在已经成为了一种很标准的数据交互、参数配置的格式。另外AJAX能够帮助初学者理解一定的网络技术原理，而网络技术也是机器人工程师必备的技能。再者，制作GUI（图形用户界面）是常规debug的办法，而近年来一个流行的趋势是用webkit嵌入程序用HTML和Javascript作为图形界面的后端，而在机器人操作系统ROS（[ROS.org | Powering the world's robots](https://link.zhihu.com/?target=http%3A//www.ros.org/)）里，通过rosbridge可以非常方便地把机器人程序的数据传递到websocket上，这句话看不懂没关系，反正你知道学学HTML和Javascript很重要就是了。更重要的是，HTML文档背后的DOM (Document Object Model)深刻地体现了面向对象的思想。大学中的面向对象程序设计一般都讲C++，在我看来应该讲HTML和Javascript。这一点不细说了，如果同学们去学习HTML和Javascript，自然会体会到。学习HTML和Javascript比较好的资料是[http://www.w3schools.com/](https://link.zhihu.com/?target=http%3A//www.w3schools.com/)，把网站左侧的“Learn HTML”、“Learn CSS”、“Learn Javascript”和“Learn JQuery”学完就行，别的部分还有很多花哨的技术，没有必要去学了。为了培养自己对Javascript的兴趣，可以上[three.js / examples](https://link.zhihu.com/?target=http%3A//threejs.org/examples/)跪着看看热闹。
@@ -101,7 +121,13 @@ IT行业的程序员都会争论高级语言和低级语言哪个好，Linux和W
 
 同学的学校应该给大二到大三的学生有开设面向对象的程序设计，一般用Java或C++教授。在面向对象的程序课里面，<font color = SandyBrown>一定要积累3000行左右的代码的开发经验</font>。经典的面向对象程序设计的练习通常是写游戏，比如俄罗斯方块，吃豆人等等，一定要自己能够做到完全手写一个完整的项目出来。
 
+- [ ] 小项目
+
 另外你可以开始学习<font color = SandyBrown>**Matlab当中的神器Simulink**</font>了。在大二这一年的学习中，你可能在不少课程里多多少少用到了Matlab。假设你已经在我的推荐下喜欢上了Python，你可能会觉得Matlab的计算工具没有比Python强多少；假设你自己在别人的推荐下喜欢上了mathematica（[Mathematica 到底有多厉害？ - Wolfram Mathematica](https://www.zhihu.com/question/27834147)），你可能会觉得和Mathematica这种神一样的语言比起来，Matlab弱爆了。但是要注意的是，Matlab最强大的工具是Simulink，通过它你几乎可以仿真一切的物理系统和控制系统。我建议同学可以通过Simulink实现一个倒立摆，然后理解Matlab的强大之处。对此我强烈推荐一个[很好的教材](https://link.zhihu.com/?target=http%3A//ctms.engin.umich.edu/CTMS/index.php%3Fexample%3DIntroduction%26section%3DSimulinkControl)），它详细介绍了一些经典的控制系统如何分析以及用Simulink实现。然后我再强烈推荐一个讲Simulink里面一个更加和物理仿真贴近的工具Simscape（[Control of an Inverted Pendulum on a Cart](https://link.zhihu.com/?target=http%3A//www.mathworks.com/help/control/examples/control-of-an-inverted-pendulum-on-a-cart.html)）的文章。阅读并实现了这两篇文章里的内容，同学应该会对倒立摆有了比较深刻的认识。倒立摆是机器人学中一个非常重要的模型，因为火箭、导弹、双足机器人、四足机器人，基本都是倒立摆的变形。你自己实现出来的simulink模型一定要存好，以后可能还会再拿出来仔细看。
+
+- [ ] Simulink
+- [ ] Simscape
+- [ ] 倒立摆
 
 如果你按照我之前说的方法探索了一些HTML和Javascript的技术，那么JQuery，bootstrap，AngularJS你已经多多少少知道是怎么回事了。web后端的技术，比如PHP和MySQL，也可以了解一下，LAMP要学会怎么配置。如果有同学找你帮忙写小网站，尽量去帮个忙，帮别人做网站是提高自己系统编程能力的好练习。在做网站的过程中你可能还会顺便学一学如何用Photoshop和Illustrator让网站显得更漂亮。这些技能有最好，没空学也没关系。
 
@@ -116,6 +142,8 @@ IT行业的程序员都会争论高级语言和低级语言哪个好，Linux和W
 
 
 Robocon水平的机器人，涉及大量的机械设计，单片机开发，电机驱动的开发，码盘和超声波等传感器的读取，底盘运动学的计算，PID调试，任务调度逻辑的调试，舵机控制。RoboMasters的战车的机械部分简单一些，但是还需要进行云台的控制、发弹系统的控制、功率控制等方面的知识，另外你也可以不搞这些部分，学习学习视觉识别和自动打击，那么就要开始研究OpenCV（[OpenCV | OpenCV](https://link.zhihu.com/?target=http%3A//opencv.org/)）了。
+
+- [ ] OpenCV
 
 四旋翼飞行器的机械部分最简单，但是算法比较复杂。对于大三学生来说，从零开始一步到位写一个稳定的飞控比较困难，因为飞控里面有很多细小的知识点要注意。目前我没有发现什么比较好的书籍推荐，已有的一些关于四旋翼系统的书要么太浅（上来就教你焊电路），要么太深（上来就教你state estimation），听说 [@Liu Top](https://www.zhihu.com/people/liu-top)的exbot小组在写一个教材，我是非常期待的。学习四旋翼飞行器有下面几个步骤：
 
@@ -175,9 +203,13 @@ chiplab7的飞控是靠气压计定高的，飞行效果非常奔放。这时候
 
 大三的时候学校应该会开设<font color = SandyBrown>软件工程的课程</font>。不管你是不是这个专业，上不上这门课，都应该主动去听一听，甚至跟着课程的设计作业一起做一做。软件工程我觉得是机器人工程师必须具备的意识，因为一个机器人系统里涉及大量的硬件系统和软件功能，软件的部分往往还会涉及不同的语言、不同的编译环境、不同的开发工具链。几个人合作的话，大家的专业背景、编程习惯都不相同，这就导致不同的代码和模块之间的协议沟通非常复杂，必须尽早用UML和其他软件工程的工具帮助团队理解和互相沟通。
 
+- [ ] 软件工程
+
 大三的时候学校应该还会开设操作系统原理和嵌入式系统原理的课程，而大二的时候讲过计算机组成原理（所谓的微机原理）。从大三开始同学需要开始体会实时操作系统和非实时操作系统的区别、原理以及使用时需要注意的地方。这是一个比较杂的知识点，我目前没有找到很好的教材去介绍。在STM32上，有freeRTOS，uCOS，Vxworks这么几种实时操作系统；Linux是一种非实时操作系统，但是可以通过打补丁变成实时操作系统。这些操作系统的细节在机器人开发中都会多多少少被涉及到，同学们可以随时上Google和CSDN去查大神们的介绍。
 
 另外特别重要的一点是机器人系统里的嵌入式平台都有烧坏的可能性，有可能在某个嵌入式Linux平台上面辛辛苦苦写了一个多月代码，这个平台突然烧坏了，代码也就丢了。因此你的机器人如果有嵌入式Linux系统在里面，一定要尽早顶起来路由器，代码定时提交SVN或者git。
+
+- [ ] git
 
 大三的暑假你可能会作为学校机器人队的主力去参赛了。备战比赛和参赛是一件磨练心性的事情。我在学生时代体会过和胜利擦肩而过的痛苦，体会过没机会再来一年的遗憾；也在负责大疆RoboMasters比赛的过程中被那些痛苦和遗憾的学生当做发泄的对象，非常有感触。我觉得参加机器人比赛，很努力，然后失败了，是一件让人快速成长的事情。同学如果有机会，一定应该参加至少一届机器人比赛。
 
@@ -191,9 +223,17 @@ chiplab7的飞控是靠气压计定高的，飞行效果非常奔放。这时候
 
 大三阶段的机器人工程师该学什么基础数学是众说纷纭的，在我看来，你要基本掌握“群是什么”，能够用代数的眼光去证明"det(AB) = det(A)det(B)"，还要能理解“用一张纸就可以变出克莱因瓶”（当然是在四维空间里）。另外，你这个时候也要能够意识到自己需要再学一遍线性代数。
 
+- [ ] 群论
+- [ ] 拓扑学
+
 ## **大四**
 
 大四开始了，你可以开始深挖自己的研究方向，同时也要开始学一些高级一点的通用技术和理论，这时候你和一般的机械、电子、计算机学生就不太一样了，你虽然也在狂编程，但也在狂学习物理和数学。通用技术包括ROS，simulink，gazebo和Vrep等工具。通用理论包括，再学一遍线性代数，学学凸优化、数值计算、旋转表示法等方面的知识。这些知识你在大四仅仅只能开一个头，因为你的大四要实习、毕业、考研、毕设，你会非常地忙。有些人会在大四进实验室和老师发论文，我个人觉得发论文这件事没必要操之过急。你的整个大学期间应该用在广泛涉猎各种各样的知识上面，而不是深入某一个细小的研究问题。
+
+- [ ] 线性代数
+- [ ] 凸优化
+- [ ] 数值计算
+- [ ] 旋转表示法
 
 大四可以开始读一些著名入门书籍，我把这些书不分先后地列出来，你没有必要全部去读，而且每本书先读前几章就够了，能读多少尽量读多少。
 
@@ -233,6 +273,8 @@ ROS的可视化工具Rviz里面对于机器人旋转的表示用的是四元数�
 为了写出美观的技术报告和毕业论文，你可以开始学习Latex。Latex作为国际国内第一写作神器，学习资料在网上有很多。Latex的学习和使用同样也是需要不断地熟能生巧，多写多练就熟悉了。写毕业论文有个问题是怎么做出精美的矢量图，我推荐[Draw Freely | Inkscape](https://link.zhihu.com/?target=https%3A//inkscape.org/en/)，一个比Illustrator更轻量化、但是有些功能反而更强大的免费软件。
 
 对于那些想申请出国留学的同学，你要做一个自己个人的成果展示，用网页的形式呈现比较好。把自己Github链接（如果你按我说的，大学第一天就申请Github账号，现在已经是一个三年的老油条了）、做过的机器人视频、写过的技术报告和文章（最好是英文的）放在上面。
+
+- [ ] 个人主页
 
 关于毕业设计的选题，我推荐这么几个：
 

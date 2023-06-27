@@ -103,6 +103,8 @@ suyu     27173 25827  0 09:08    pts/0    00:00:00 grep --color=auto helloworld
 
 这里找到的，应该都是“本次搜索”（TTY均为pts/0）。我的理解是，像清点人数不要忘了自己，在查找含`helloworld.cpp`或`helloworld`的进程时，不要忘了本次搜索**“本身”**也含有`helloworld.cpp`或`helloworld`。其中`--color=auto`的意思是：对匹配内容高亮显示。
 
+4. pthread不是Linux下默认的库，cmake要自己链接
+
 ##   ROS
 
 1. RLExceplition:[xx.launch] is neither a ...
@@ -114,7 +116,9 @@ suyu     27173 25827  0 09:08    pts/0    00:00:00 grep --color=auto helloworld
    source ~/catkin_ws/devel/setup.bash
    ```
 
-2. Could not find the GUI 
+2. ```shell
+   Could not find the GUI 
+   ```
 
    升级`joint_state_publish_gui`把launch文件中的`joint_state_publisher`修改为`joint_state_publish_gui`。
 
@@ -126,17 +130,25 @@ suyu     27173 25827  0 09:08    pts/0    00:00:00 grep --color=auto helloworld
 $ rospack find [pack_name]
 ```
 
-5. Invoking "cmake" failed 
+5. ```shell
+   Invoking "cmake" failed
+   ```
+
+    
 
 6. ROSModel报错 
 
    改`Frame`为`base_link`
 
-7. Invoking "make cmake_check_build_system" failed
+7. ```shell
+   Invoking "make cmake_check_build_system" failed
+   ```
 
    不同功能包里不有重名的节点。
 
-8. Make sure file exists in package path and permission is set to excutable (chmod + x)
+8. ```cpp
+   Make sure file exists in package path and permission is set to excutable (chmod + x)
+   ```
 
    注意文件的属性 ，本次是"scripts  >> mrobot_teleop.py"，“属性>>可执行”
 
@@ -153,21 +165,33 @@ $ rospack find [pack_name]
 
 11. urdf第一行不能修改，尽量去掉注释
 
-12. Error  reading  end  tag 
+12. ```cpp
+    Error  reading  end  tag 
+    ```
 
     检查标签是否成对
 
-13. Couldn't  save  project  < invalid  path >
+13. ```cpp
+    Couldn't  save  project  < invalid  path >
+    ```
 
     设置路径
 
 14. 注意`oarm6.xacro`本身就是宏，引用时要加上`</xacro:macro`
 
-15. maximum recursion depth exceeded
+15. ```cpp
+    maximum recursion depth exceeded
+    ```
 
-16. - Resource not found: The following package was not found in <arg default="$(find oarm6_moveit_config)/default_warehouse_mongo_db" name="db_path"/>: oarm6_moveit_config
+    
+
+16. - ```cpp
+      Resource not found: The following package was not found in <arg default="$(find oarm6_moveit_config)/default_warehouse_mongo_db" name="db_path"/>: oarm6_moveit_config
       ROS path [0]=/opt/ros/melodic/share/ros
       ROS path [1]=/opt/ros/melodic/share
+      ```
+      
+      
 
     [Building Common MoveIt Dependencies from Source in Catkin](https://blog.csdn.net/lwq123free/article/details/97007370?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165564144116782425159299%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=165564144116782425159299&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-3-97007370-null-null.142^v17^pc_rank_34,157^v15^new_3&utm_term=default_warehouse_mongo_db&spm=1018.2226.3001.4187)
 
@@ -184,22 +208,27 @@ $ rospack find [pack_name]
 
       只有改动之前的`oarm6`。
 
-      记得要在`package.xml`和`CMakeList.txt`中同步修改名称
+      **记得要在`package.xml`和`CMakeList.txt`中同步修改名称**
 
       [更改ROS功能包的名称](https://www.guyuehome.com/35250)
 
-17. Invalid <arg> tag: moveit_config
+17. ```cpp
+    Invalid <arg> tag: moveit_config
     ROS path [0]=/opt/ros/indigo/share/ros
     ROS path [1]=/home/spark/my_ws/src
     ROS path [2]=/home/spark/catkin_ws/src
     ROS path [3]=/opt/ros/indigo/share
     ROS path [4]=/opt/ros/indigo/stacks. 
-
+    
     Arg xml is <arg default="$(find moveit_config)/default_warehouse_mongo_db" name="db_path"/>
     The traceback for the exception was written to the log file
+    ```
+
     moveit_config是一个类似元功能包，不能递归的编译，需要在src 根目录下编译
 
-18. <arg default="$(find oarm6_moveit_config)/default_warehouse_mongo_db" name="db_path"/>: oarm6_moveit_config
+18. ```cpp
+    <arg default="$(find oarm6_moveit_config)/default_warehouse_mongo_db" name="db_path"/>: oarm6_moveit_config
+    ```
 
     `$(find oarm6_moveit_config)`是该包的路径，从/home开始写（不加$）就算绝对路径。
 
@@ -210,9 +239,11 @@ $ rospack find [pack_name]
 20. - [ROS创建工作空间、功能包，编译示例程序](https://blog.csdn.net/qq_41667348/article/details/113484488?ops_request_misc=&request_id=&biz_id=102&utm_term=env%7Cgrep%20ros&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-113484488.142^v20^huaweicloudv1,157^v15^new_3&spm=1018.2226.3001.4187)
     - [关于ROS中找不到工作空间的功能包解决](https://blog.csdn.net/ypk138/article/details/120523830?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1-120523830-blog-123138693.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1-120523830-blog-123138693.pc_relevant_default&utm_relevant_index=1)
 
-21. RLException: error loading tag:
+21. ```cpp
+    RLException: error loading tag:
     file does not exist [3]
     XML is <rosparam command="load" file="3" ns="manipulator"/ >
+    ```
 
     报错意思是没有kinematics.yaml文件，因此在设置组的时候填上3是不对的，点击后面的浏览文件按钮，选择在solidworks插件生成的config文件`（oarm6_descrption/config）`，而不是填3。古月书里moveit setup assistant助手设置 planning groups中，设置的是`Kin.Solver Attempts`,而现在是`Kin.parameters file`。
 
@@ -224,7 +255,9 @@ $ rospack find [pack_name]
 
 23. [Moveit!碰撞检测添加模型](https://blog.csdn.net/anyingdaozhimi/article/details/109253898?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165590702916780366590112%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=165590702916780366590112&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-3-109253898-null-null.142^v20^huaweicloudv1,157^v15^new_3&utm_term=moveit%E7%A2%B0%E6%92%9E%E6%A3%80%E6%B5%8B&spm=1018.2226.3001.4187)
 
-24. RLException: Invalid roslaunch XML syntax: no element found: line 42, column 0 The traceback for the exception was written to the log file
+24. ```cpp
+    RLException: Invalid roslaunch XML syntax: no element found: line 42, column 0 The traceback for the exception was written to the log file
+    ```
 
     检查标签是非完整对称。
 
@@ -234,9 +267,11 @@ $ rospack find [pack_name]
     </launch>
     ```
 
-25. RLException: error loading <rosparam> tag: 
+25. ```cpp
+    RLException: error loading <rosparam> tag: 
     	file does not exist [/home/suyu/catkin_ws/src/oarm6_description/config/oarm.yaml]
     XML is <rosparam command="load" file="$(find oarm6_description)/config/oarm.yaml"/>
+    ```
 
     [Wiki](https://answers.ros.org/question/287342/launch-move_base-error-loading-rosparam-tag/)
 
@@ -275,7 +310,54 @@ $ rospack find [pack_name]
     ros::Duration(3.0).sleep()//加入休眠，延迟第一条数据的发送
     ```
 
+31. 注意头文件`std_msgs/String.h`是`msgs`
+
+32. ```shell
+    find_package(catkin) failed.  catkin was neither found in the workspace nor   in the CMAKE_PREFIX_PATH.  One reason may be that no ROS setup.sh was   sourced before.
+    ```
+
+    ***直接原因就是***： CMAKE_PREFIX_PATH中未找到 .catkin 
+
+    因此，我们只需将 .catkin 的路径添加到CMAKE_PREFIX_PATH中即可。
+
+    ```shell
+    locate .catkin
+    >> /home/suyu/catkin_ws/devel/.catkin
     
+    echo " export CMAKE_PREFIX_PATH=/home/suyu/catkin_ws/devel/:$CMAKE_PREFIX_PATH">>~/.bashrc
+    ```
+
+    [解决](https://blog.csdn.net/Alex_wise/article/details/105201687?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167100963416782412572282%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=167100963416782412572282&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-105201687-null-null.142^v68^control,201^v4^add_ask,213^v2^t3_esquery_v1&utm_term=%20find_package%28catkin%29%20failed.%20%20catkin%20was%20neither%20found%20in%20the%20workspace%20nor%20%20%20in%20the%20CMAKE_PREFIX_PATH.%20%20One%20reason%20may%20be%20that%20no%20ROS%20setup.sh%20was%20%20%20sourced%20before.&spm=1018.2226.3001.4187)
+
+33. 编写srv，msg，action时**`uint`不要写错**
+
+34. ```cpp
+    [ERROR] [1671445442.740098899]: No link elements found in urdf file
+    [robot_state_publisher-3] process has died [pid 8213, exit code 1, cmd /opt/ros/noetic/lib/robot_state_publisher/robot_state_publisher __name:=robot_state_publisher __log:=/home/suyu/.ros/log/41df14ac-7f87-11ed-85a2-2314f5e6c7f7/robot_state_publisher-3.log].
+    ```
+
+    - 可能性一：
+
+      在`noetic`版本中xacro文件的宏调用是<xacro：mrobot_body/>，原老版本为<mrobot_body/>
+
+    - 可能性二：
+
+      [No link elements found in urdf file](https://blog.csdn.net/weixin_42314494/article/details/123989003?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167144465416800192233542%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=167144465416800192233542&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-123989003-null-null.142^v68^control,201^v4^add_ask,213^v2^t3_esquery_v1&utm_term=%5BERROR%5D%20%5B1671444610.084140078%5D%3A%20No%20link%20elements%20found%20in%20urdf%20file&spm=1018.2226.3001.4187)
+
+      ```xml
+      The create.urdf.xacro file just contains a macro for instantiating a create model, but does not call it. The intended use is to include the create.urdf.xacro file in your model and then instantiate it like so:
+      
+      <xacro:include filename="$(find create_description)/urdf/create.urdf.xacro"/>
+      <create />
+      ```
+
+35. ```shell
+    [ WARN] [1671454932.937121505]: Joint state with name: "base_l_wheel_joint" was received but not found in URDF
+    ```
+
+    修改成对应名称即可，可能是ROS默认的命名方式
+
+
 
 ## 比赛
 
@@ -308,12 +390,37 @@ $ rospack find [pack_name]
    一旦一个程序发生了越界访问，cpu 就会产生相应的保护，于是 segmentation fault 就出现了，通过上面的解释，段错误应该就是访问了不可访问的内存，这个内存区要么是不存在的，要么是受到系统保护的，还有可能是缺少文件或者文件损坏。
 
    [段错误 (核心已转储)](https://gitee.com/hitcrt2022_vision_edu/lqm120-l021920/blob/master/week03/demo1_c++version.cpp)
-   
+
 4. ```cpp
    Warning: 'typedef' was ignored in this declaration.
    ```
 
    Delete `typedef`. It's the C way of declaring structs, C++ does it automatically for you.
+
+5. <font color = SandyBrown>**不要函数名和变量名重名！！！**</font>
+
+6. ***#include <unistd.h>***
+
+   ubuntu里没有<Windows.h>头文件，在<unistd.h>里有usleep()
+
+7. <font color = SandyBrown>**对于分文件编写**</font>
+
+   - 把次级目录编写成动态库
+   - 把`.cpp`文件链接到源文件下
+
+
+8. `boost::this_thread‘ has not been declared； undefined reference to ‘boost::this_thread...‘`
+
+   [Debug](https://blog.csdn.net/qq_41035283/article/details/124746050?ops_request_misc=&request_id=&biz_id=102&utm_term=%20undefined%20reference%20to%20%60boost&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-124746050.142^v73^control,201^v4^add_ask,239^v2^insert_chatgpt&spm=1018.2226.3001.4187)
+
+9. `forming pointer to reference type`
+
+   标准容器中是“按值”存放并操纵存放于其中的实例的，不允许在标准容器中存放“引用”，因为容器中很可能有`T* t`之类的底层存储指针，那么如果T被实例化为引用类型（例如 int&），则`T* t`就变成了`int&* t`（即`pointer to reference`），所以非法。与“指向引用的指针是非法的”类似，C++中同样不允许“引用数组”：
+
+   ```cpp
+   int& *p;  //pointer to reference，非法
+   int& a[3]; //引用数组，非法
+   ```
 
 ## CMake
 
@@ -453,7 +560,81 @@ $ rospack find [pack_name]
 
     按完整工程格式编译模板
 
+11. 删去build中的所有文件，再打开VSCode,选择第二个(Let CMake guess what compilers and environment to use)
 
+    ![](/home/suyu/2022-10-11 20-01-33 的屏幕截图.png)
+
+12. ```cmake
+    # cmake version
+    CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
+    
+    # project name
+    PROJECT(program)
+    set(CMAKE_CXX_STANDARD 14)
+    
+    # find OpenCV PCL
+    FIND_PACKAGE(OpenCV REQUIRED)
+    find_package(PCL  REQUIRED )
+    
+    # show the message of OpenCV
+    MESSAGE(STATUS "OpenCV library status:")
+    # MESSAGE(STATUS "    version: 	${OpenCV_VERSION}")
+    # MESSAGE(STATUS "    headers: 	${OpenCV_INCLUDE_DIRS}")
+    # MESSAGE(STATUS "    libraries: 	${OpenCV_LIBS}")
+    
+    # show the message of PCL
+    MESSAGE(STATUS "PCL library status:")
+    # MESSAGE(STATUS "    version: 	${PCL_VERSION}")
+    # MESSAGE(STATUS "    headers: 	${PCL_INCLUDE_DIRS}")
+    # MESSAGE(STATUS "    libraries: 	${PCL_LIBS}")
+    
+    # link headers
+    INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIRS} )
+    INCLUDE_DIRECTORIES(${PCL_INCLUDE_DIRS} ) 
+    INCLUDE_DIRECTORIES(./include)
+    
+    #设置输出路径
+    SET (EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+    
+    
+    LINK_DIRECTORIES(${PCL_LIBRARY_DIRS})   
+    
+    ADD_DEFINITIONS(${PCL_DEFINITIONS})  
+    
+    # 添加源代码文件到SRC_LIST变量中
+    AUX_SOURCE_DIRECTORY(src SRC_LIST)
+    
+    # 生成可执行文件
+    ADD_EXECUTABLE(program ${SRC_LIST})
+    
+    
+    
+    # after ADD_EXECUTABLE，为生成文件target添加库
+    TARGET_LINK_LIBRARIES(program ${OpenCV_LIBS})
+    TARGET_LINK_LIBRARIES(program ${PCL_LIBRARIES})
+    TARGET_LINK_LIBRARIES(program pthread)
+    
+    
+    
+    
+    ```
+
+13. ```cmake
+    #在test目录下
+    aux_source_directory(test SRC_LIST)
+    #这个指令的含义是在当前目录下，找到test目录，并将里面的所有文件一起设置成SRC_LIST
+    No SOURCES given to target: demo
+    [cmake] 
+    
+    #所以要把test改成.(当前目录)
+    aux_source_directory(. SRC_LIST)
+    ```
+
+14. ` error: no matching function for call to ‘MD_1TaskNN::MD_1TaskNN(std::shared_ptr<ThreadWatcher>)’
+      146 |  { ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+          |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    `
 
 
 
@@ -537,9 +718,15 @@ image.at<Vec3b>(i,j)[k]：是指取出彩色图像中i行j列第k通道的颜色
 .at<>()返回一个值，.ptr<>()返回一个地址
 ```
 
+9. `cannot declare member function ‘static GoalInfo Task::getTaskResult()’ to have static linkage `
 
+   - 问题分析：
+     出现这种情况通常.h文件中声明类的成员函数用static修饰。此时static的作用是让一个类只有一个static成员函数实例化。
+     在.cpp文件中实现函数的时候，也加了static修饰符，此时static修饰符的作用是当前函数只能作用在当前的cpp文件。
 
-## Git
+   - 解决方法：
+     删除.cpp文件的static修饰符。或者在.h文件中实现。
+     Git
 
 1. ```cpp
    fatal: Not possible to fast-forward, aborting.

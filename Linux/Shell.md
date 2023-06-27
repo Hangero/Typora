@@ -4,7 +4,7 @@
 
 ### 什么是shell
 
-jjj网上有很多shell 的概念介绍，其实都很官方化，如果你对linux 命令很熟悉，那么编写shell 就不是一个难事，shell 本质上是 linux 命令，一条一条命令组合在一起，实现某一个目的，就变成了shell脚本。它从一定程度上 减轻了工作量，提高了工作效率。
+网上有很多shell 的概念介绍，其实都很官方化，如果你对linux 命令很熟悉，那么编写shell 就不是一个难事，shell 本质上是 linux 命令，一条一条命令组合在一起，实现某一个目的，就变成了shell脚本。它从一定程度上 减轻了工作量，提高了工作效率。
 
 ### 官方shell 介绍
 
@@ -102,9 +102,9 @@ declare  #声名shell变量，设置变量属性。也可以写成typeset。decl
 <h4 id="1">脚本标量的特殊用法</h4>
 
 ```shell
-""   #双引号，包含的变量会被解释
+""     #双引号，包含的变量会被解释
 ''     #单引号，包含的变量被当成字符串处理
-``  #反引号，包含内容作为系统命令，并执行其内容，可替换输出为一个变量
+``     #反引号，包含内容作为系统命令，并执行其内容，可替换输出为一个变量
 \      #转义字符，同c语言中的\n \t \r \a 等    echo命令中需要-e转义
 (命令序列)   #由子shell来完成，不影响当前shell中的变量
 {命令序列}   #由当前shell执行，会影响当前变量
@@ -180,9 +180,9 @@ test命令：用于测试字符串、文件状态和数字
 -s   #文件非空
 ```
 
-2. 字符串测试
+2. *字符串测试
 
-test    str_operator    "str"          或      [ str_operator "str" ]
+-test    str_operator    "str"          或      [ str_operator "str" ]
 
 test  "str1"   str_operator  "str2"  或  [ "str1"    str_operator    "str2" ]
 
@@ -195,7 +195,7 @@ test  "str1"   str_operator  "str2"  或  [ "str1"    str_operator    "str2" ]
 
 3. 数值测试
 
-test num1 num_operator num2   或  [ num1 num_operator num2 ]
+test num1 num_operator num2   或  [ num1 n+um_operator num2 ]
 
 ```shell
 -eq		 #等于，应用于整型比较 equal；                               equal
@@ -471,3 +471,55 @@ done
 
 ```
 
+### 自启动程序
+
+```bash
+#!/bin/bash
+# autostart script
+
+sec=1	# 间隔多少秒检测一次程序
+cnt=0	# 多少次崩溃后重新编译
+password='0' # 管理员密码
+binary_name='RM_Sentry_Run'	# 二进制文件名字
+copy_name='RM_code_copy' # 复制二进制文件名字
+root_path='/home/crt-rm/sentry_up_new' # 项目根目录
+while [ 1 ]
+do
+count=`ps -ef | grep $copy_name | grep -v "grep" | wc -l`	# 检查自己的代码在系统中的进程个数
+#grep -v  反向查找，寻找不含...字段的行
+echo "Thread count: $count" 
+echo "Expection count: $cnt"
+if [ $count -ge 1 ]; then
+	echo "The $copy_name is still alive!"
+	sleep $sec
+else 
+	echo "Starting $copy_name..."
+	# TODO 如果崩溃则对串口赋权限，因为串口松动可能会变成 /dev/ttyUSB1，因此对两个串口都赋予权限
+	echo $password|sudo -S sudo chmod +777 /dev/ttyUSB0
+	echo $password|sudo -S sudo chmod +777 /dev/ttyUSB1
+    # 重启代码
+    cd "$root_path/bin"
+    cp $binary_name $copy_name
+    chmod +777 $copy_name
+    gnome-terminal -x bash -c "./$copy_name;exec bash;"#创建新的终端并执行命令
+    echo "$copy_name has started!"		
+	sleep $sec
+	((cnt=cnt+1))
+	# 15次以后重新编译代码
+	if [ $cnt -gt 15 ]; then
+		cd $root_path
+		rm -rf build
+    mkdir build && cd build && cmake .. && make clean && make -j8
+    cd "$root_path/bin"
+		cp $binary_name $copy_name
+		chmod +777 $copy_name
+    	gnome-terminal -x bash -c "./$copy_name;exec bash;"
+    	echo "$copy_name has started!"
+		cnt=0
+	fi
+fi
+done
+
+```
+
+exec是用被执行的命令行替换掉当前的shell进程，且exec命令后的其他命令将不再执行。

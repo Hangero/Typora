@@ -82,6 +82,10 @@ chattr命令用于设置文件的隐藏权限，英文全称为change attributes
 | -r   | 若给出的源文件是目录文件，则cp将递归复制该目录下的所有子目录和文件，目标文件必须为一个目录名 |
 | -l   | 不作复制，只是链接文件                                       |
 
+```shell
+cp [选项]... 源文件... 目录
+```
+
 
 
 ### df
@@ -277,6 +281,67 @@ find /var/log -type f -mtime +5 -exec rm {} \;
 
 `kill 进程的PID`配合`ps -ef`使用
 
+### pushd  popd
+
+Linux有三个关于目录切换的常用命令，分别是`cd,pushd,popd`。
+
+**pushd的 功能是创建一个目录栈**，你可以把你目前常见的几个目录压入栈中，并可以迅速地进行切换，非常方便。如：
+
+```shell
+[root@localhost etc]# pushd ~/Desktop/shell_test/
+~/Desktop/shell_test    /etc
+[root@localhost shell_test]#
+```
+
+此时，再输入pushd会将栈顶目录和下一目录对调。即：
+
+```shell
+[root@localhost shell_test]# pushd 
+/etc    ~/Desktop/shell_test
+[root@localhost etc]#
+```
+
+可以看到此时栈顶目录又变为/etc
+
+至于popd，作用则是与pushd相反，将栈顶的目录弹出，此时除非再一次使用pushd压栈，否则pushd无法再找到已弹出的目录。
+
+```shell
+[root@localhost etc]# popd
+~/Desktop/shell_test
+[root@localhost shell_test]#
+-----
+#popd [+N|-N]还可以指定目录栈的哪个目录优先出栈
+```
+
+```shell
+➜  GDB git:(dev) ✗ dit 
+zsh: command not found: dit
+➜  GDB git:(dev) ✗ fir
+zsh: command not found: fir
+➜  GDB git:(dev) ✗ dir
+bin  build  CMakeLists.txt  src
+➜  GDB git:(dev) ✗ dirs 
+~/Program/GDB ~/Program/Armor ~
+➜  GDB git:(dev) ✗ pushd ../learnperf 
+~/Program/learnperf ~/Program/GDB ~/Program/Armor ~
+➜  learnperf git:(dev) ✗ dirs #显示目录栈
+~/Program/learnperf ~/Program/GDB ~/Program/Armor ~
+➜  learnperf git:(dev) ✗ dirs -v #按顺序显示目录栈
+0	~/Program/learnperf
+1	~/Program/GDB
+2	~/Program/Armor
+3	~
+➜  learnperf git:(dev) ✗ pushd +1 #实际上是移动两个
+~/Program/Armor ~ ~/Program/learnperf ~/Program/GDB
+➜  Armor git:(dev) ✗ pushd -1 #也是移动两个
+~ ~/Program/learnperf ~/Program/GDB ~/Program/Armor
+➜  ~ pushd
+~/Program/learnperf ~ ~/Program/GDB ~/Program/Armor
+
+```
+
+
+
 ### rm
 
 | 参数 | 含 义                                |
@@ -417,6 +482,59 @@ Configure是一个可执行的脚本，它有很多选项，在待安装的源�
 | **/var**       | **主要存放经常变化的文件，如日志**                           |
 | /lost+found    | 当文件系统发生错误时，将一些丢失的文件片段存放在这里         |
 
+
+
+#### `/usr/bin`与`/usr/local/bin`
+
+很多应用都安装在/usr/local下面，那么，这些应用为什么选择这个目录呢？理解了最根源的原因后，也许对你理解linux组织文件的方式有更直观的理解。
+答案是：Automake工具定义了下面的一组变量：
+
+```shell
+Directory variable  Default value  
+prefix  /usr/local  
+  exec_prefix   ${prefix}  
+    bindir  ${exec_prefix}/bin  
+    libdir  ${exec_prefix}/lib 
+    …  
+  includedir    ${prefix}/include  
+  datarootdir   ${prefix}/share  
+    datadir ${datarootdir}  
+    mandir  ${datarootdir}/man  
+    infodir ${datarootdir}/info  
+    docdir  ${datarootdir}/doc/${PACKAGE}  
+  …  
+```
+
+而GUN下面绝大部分应用的编译系统都是用automake。多很多应用都安装在了`/usr/local/`目录下
+
+`usr `指 `Unix Software Resource`，而不是User。通常**`/usr/bin`下面的都是系统预装的可执行程序**，会随着系统升级而改变。**`/usr/local/bin`目录是给用户放置自己的可执行程序的地方**，推荐放在这里，不会被系统升级而覆盖同名文件。
+
+如果两个目录下有相同的可执行程序，谁优先执行受到PATH环境变量的影响：
+
+```bash
+echo $PATH 
+/home/suyu/catkin_ws/devel/bin:/opt/ros/noetic/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+#这里/usr/local/bin优先于/usr/bin,
+```
+
+#### /dev
+
+- /dev/tty                                                    当前控制终端Terminal
+- /dev/ttyn和/dev/console                         （虚拟）控制台终端
+- /dev/ttySn   一般为/dev/ttyS0                 串行端口终端，接串口线使用的端口设备
+- /dev/ttyUSBn   一般为/dev/ttyUSB0       USB转串口终端，接USB转串口线可用此端口设备
+  
+
+
+
+
+
+
+
+
+
+
+
 ### GDB调试
 
 #### 启动GDB
@@ -480,7 +598,7 @@ gdb
 
 
 
-### 正常调试
+#### 正常调试
 
 1. 取指定位置的堆栈操作
 
@@ -658,7 +776,7 @@ GDb7.0以上的平台开始支持反向调试
 
 反向调试需要开启记录，调试结束关闭记录，只有在开启记录之后才能完全正常的进行反向调试。
 
-1. 开启记录关闭记录
+1. 开启记录关闭记录规定不
 
 ```Bash
 # 开启记录
@@ -703,7 +821,7 @@ set exec-direction [forward | reverse]
 
 
 
-## gdb执行需赋权的程序
+#### gdb执行需赋权的程序
 
 
 

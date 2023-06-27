@@ -73,4 +73,15 @@
     v.
     (使)沿曲线运动;呈曲线形
 
+15. hand waving”
+
+    除了直白的“挥手”之意外，
+
+    其引申或喻意中英词典竟无收录。其基本意思为“试图解释或说服而使用的无实质性的言词、论据、姿势或动作等”（insubstantial words, arguments, gestures, or actions used in an attempt to explain or persuade；Insubstantial words or actions intended to convince or impress）。
+
+16. explicit
+    英 [ɪkˈsplɪsɪt]   美 [ɪkˈsplɪsɪt]  
+    adj.
+    明确的;详述的;直言的, 坦率的;一目了然的
+    派生词： explicitly adv. explicitness n.
 

@@ -789,3 +789,35 @@ void approxPolyDP(InputArray curve, OutputArray approxCurve, double epsilon, boo
 | epsilon     | 近似值的精确度，即原始曲线和近似曲线的最大距离 |
 | closed      | 表示输出的多边形是否封闭                       |
 
+
+
+
+
+## cv::threshold
+
+```cpp
+double cv::threshold	(	InputArray 	src,
+OutputArray 	dst,
+double 	thresh,
+double 	maxval,
+int 	type 
+)		
+```
+
+
+
+| 参数   | 含义                                              |
+| ------ | ------------------------------------------------- |
+| src    | 源图像，可以为8位的灰度图，也可以为32位的彩色图像 |
+| dst    | 输出图像                                          |
+| thresh | 阈值                                              |
+| maxval | 二值图像中灰度最大值                              |
+| type   | 阈值操作类型，具体的阈值操作实现如下图所示        |
+
+![](/home/suyu/默认/图片/20170810122741046.png)
+
+![](/home/suyu/默认/图片/20170810122752738.png)
+
+
+
+hhh
